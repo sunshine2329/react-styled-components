@@ -1,61 +1,41 @@
 import React, { Component } from 'react';
-import styled, { injectGlobal, keyframes } from "styled-components";
+import styled, { injectGlobal, css } from "styled-components";
 
 injectGlobal`
   body{
     margin: 0;
     padding: 0;
   }
-`
-class App extends Component {
-  render() {
-    return (
-      <Container>
-        <Button>Hello</Button>
-        <Button danger rotationTime={1}>Hello</Button>
-        <Anchor href="http://google.com">Go to google</Anchor>
-      </Container>
-    );
-  }
-}
+`;
+
+const awesomeCard = css`
+  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+  background-color: 2hite;
+  border-radius: 10px;
+  padding: 20px;
+`;
 
 const Container = styled.div`
   height: 100vh;
   width: 100%;
+  ${awesomeCard};
   background-color: pink;
 `
 
-const Button = styled.button`
-  border-radius: 50px;
-  padding: 5px;
-  min-width: 120px;
-  color: white;
-  font-weight: 600;
-  -webkit-appearance: none;
-  cursor: pointer;
-  &:active,
-  &:focus {
-    outline: none;
-  }
-  background-color: ${props => props.danger ? "#e74c3c" : "#2ecc71"}
-  ${props => {
-    if(props.danger) {
-      return `animation: ${rotation} ${props.rotationTime}s linear infinite`
-    }
-  }};
+const Input = styled.input.attrs({
+  required: true
+})`
+  border: none;
+  ${awesomeCard};
 `;
-
-const Anchor = Button.withComponent("a").extend`
-  text-decoration: none;
-`;
-
-const rotation = keyframes`
-  from {
-    transform: rotate(0deg);
+class App extends Component {
+  render() {
+    return (
+      <Container>
+        <Input placeholder="hello"/>
+      </Container>
+    );
   }
-  to {
-    transform: rotate(360deg);
-  }
-`
+}
 
 export default App;
